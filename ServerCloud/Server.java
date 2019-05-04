@@ -3,14 +3,15 @@ import java.util.HashMap;
 import java.util.concurrent.locks.ReentrantLock;
 import java.util.*;
 
+
 public class Server{
 
 	private static int sequence = 1;
 	private int idServer;
-	private String type_server;             // Type of Server
-	private double price_server;            // Price per Hour of Server
-	private int state;                      // 0 -> free | 1 -> ocupaded | 2 -> auction
-	private Map<String,Double> queue_users; // String -> User Email | Double -> Auction Price
+	private String type_server;
+	private double price_server;
+	private int state; // 0 -> free | 1 -> ocupaded | 2 -> auction
+	private Map<String,Double> queue_users; // String -> User_email | Double -> auction price
 
 	public Server(String type, double hourPrice, int state){
 		this.idServer = sequence++;
@@ -32,15 +33,15 @@ public class Server{
 	public Map<String,Double> getQueue(){ return this.queue_users;}
 	public int getIDServer(){return this.idServer;}
 
-	//Remove from Queue
-	public synchronized int removeToQueue(String user){
+	// Remove from queue
+	public int removeToQueue(String user){
 		if(this.queue_users.containsKey(user)){
 			this.queue_users.remove(user);
 			return 1;
 		} else{return 0;}
 	}
 
-	//Add to Queue
+	// Add to queue
 	public synchronized int addToQueue(String user, double price){
 		if(!this.queue_users.containsKey(user)){
 			this.queue_users.put(user,price);
@@ -48,8 +49,9 @@ public class Server{
 		} else{return 0;}
 	}
 
-	//Clean Queue
-	public synchronized void cleanQueue(){
+	// Clena queue
+	public void cleanQueue(){
 		this.queue_users =  new HashMap<>();
 	}
+	
 }

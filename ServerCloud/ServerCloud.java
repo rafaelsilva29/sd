@@ -11,19 +11,17 @@ import java.util.Hashtable;
 
 public class ServerCloud{
 
-	private static Map<Integer,Server> servers;                // Map with the Servers
-	private static Map<String,User> users;                     // Map with the Users
-	private Hashtable<String, PrintWriter> clients_connected;  // Hashtable with the Users connected
-	private static Map<Integer,Reserve> reserves;
+	private static Map<Integer,Server> servers; //Map com os servidores
+	private static Map<String,User> users;//Map com os users
 	private int porto;
 	private ServerSocket serverCloud;
+	private static Controler controler = new ControlerImpl();
 
 	public ServerCloud(int porto){
-		this.servers = new HashMap<Integer,Server>();
-		this.users = new HashMap<String,User>();
-		this.clients_connected = new  Hashtable<String, PrintWriter>();
+		servers = new HashMap<Integer,Server>();
+		users = new HashMap<String,User>();
 		this.porto = porto;
-		this.reserves = new HashMap<Integer,Reserve>();
+		controler = new ControlerImpl();
 	}
 
 	private void startServerCloud(){
@@ -33,7 +31,8 @@ public class ServerCloud{
 
 			System.out.println("---> SERVER CLOUD <---");
 
-			serverCloud = new ServerSocket(this.porto);
+			// Criar a sockect com o porto defenido
+			this.serverCloud = new ServerSocket(this.porto);
 
 			int idClient = 1;
 
@@ -45,7 +44,7 @@ public class ServerCloud{
 
 				System.out.println("> ServerCloud -> Connection received! Create client thread to handle connection...\n");
 
-				ClientHandler threadClient = new ClientHandler(clientSocket, this.servers, this.users, idClient, this.clients_connected, this.reserves);
+				ClientHandler threadClient = new ClientHandler(clientSocket, idClient, controler);
 				
 				idClient = idClient + 1;
 				
@@ -71,7 +70,7 @@ public class ServerCloud{
 		User daniel = new User("daniel@gmail.com","vieira",false,500.00);
 		User jose = new User("jose@gmail.com","ramos",false,150.00);
 
-		// Servers
+		// Server
 		Server s1 = new Server("t1.micro",1.00,0);
 		Server s2 = new Server("t1.micro",1.00,0);
 		Server s3 = new Server("t1.micro",1.00,0);
@@ -105,13 +104,13 @@ public class ServerCloud{
 		
 		ServerCloud serverCloud = new ServerCloud(9999);
 
-		// Put Users on Map Users
+		// Put Users on map users
 		users.put(rafa.getEmail(),rafa);
 		users.put(terra.getEmail(),terra);
 		users.put(daniel.getEmail(),daniel);
 		users.put(jose.getEmail(),jose);
 
-		// Put Servers on map Servers
+		// Put Servers on map servers
 		servers.put(s1.getIDServer(),s1);
 		servers.put(s2.getIDServer(),s2);
 		servers.put(s3.getIDServer(),s3);
@@ -135,6 +134,9 @@ public class ServerCloud{
 		servers.put(s21.getIDServer(),s21);
 		servers.put(s22.getIDServer(),s22);
 
+		controler = new ControlerImpl(servers,users);
+
 		serverCloud.startServerCloud();
+
 	}
 }

@@ -25,7 +25,7 @@ public class ClientReceive implements Runnable{
 			System.out.println(msg);
 
 		} catch (SocketException e) {
-			e.printStackTrace();
+
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

@@ -18,7 +18,8 @@ public class Client{
 	private String hostName;
 	private int porto;
 	private Menu menu;
-	private Thread receive;
+	// criar uma thread com o client para receber as mensagens
+	Thread receive;
 
 	public Client(String host, int porto)  throws Exception{
 		this.hostName = host;

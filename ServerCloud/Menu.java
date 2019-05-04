@@ -1,6 +1,8 @@
 public class Menu {
 	
-	public Menu(){}
+	public Menu(){
+
+	}
 
 	public void menuInit(){
 		System.out.println("===================================");

@@ -8,16 +8,20 @@ public class Reserve{
 
 	private static int sequence = 1;
 	private int idReserve;
-	private String username_client;      // UserName of Reserve
-	private String type_server;          // Type of Server
-	private double priceServer;          // Price of Server
-	private double current_price = 0;    // Current Price of Reserve
-	private double priceFinal;           // Price final Reserve
-	private int typeReserve;             // 0 -> means auction / 1 -> request
+	private String username_client;
+	private String type_server;
+
+	private double priceServer;  // Price server
+	private double current_price = 0;
+	private double priceFinal; // Price final reserve
+
+	private int typeReserve; // 0 -> means auction / 1 -> request
+
 	private Date date_begin;
 	private Date date_final;
-	private int state;                   // 0 -> running | 1 -> finnish
-	private int statePay;                // 0 -> unpay | 1 -> pay
+
+	private int state; // 0 -> running | 1 -> finnish
+	private int statePay; // 0 -> unpay | 1 -> pay
 
 	public Reserve(String username_client, String type_server, double price, int type, Date date){
 		this.idReserve = sequence++;
@@ -56,7 +60,6 @@ public class Reserve{
 	public int getStatePay(){return this.statePay;}
 	public double getPriceFinal(){return this.priceFinal;}
 
-	// Aux methods
 	public double getPriceCurrent(){
 		double p = 0;
 		Date aux = new Date();

@@ -1,4 +1,6 @@
+
 import java.util.HashMap;
+
 
 public class User{
 
@@ -34,11 +36,15 @@ public class User{
    	public double getMoney(){ return this.money;}
 
 	//Money
-	public void takeMoney(double u){this.money=this.money-u;}
-	public void putMoney(double u){this.money=this.money+u;}
+	public void takeMoney(double u){ this.money=this.money-u;}
+	public void putMoney(double u){ this.money=this.money+u;}
 
 	public String toString() {
         return "|Email: "+this.email+"|Password: " + this.password + "|Connection: "
                 + this.connection + "|Money: " + this.money;
     }
+
+
+ 
+
 }

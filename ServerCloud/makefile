@@ -17,7 +17,9 @@ CLASSES = \
 	  Server.java \
           Reserve.java \
 	  ClientReceive.java \
-	  Tuple.java
+	  Tuple.java \
+	  ControlerImpl.java \
+	  Controler.java
 
 default: classes
 
